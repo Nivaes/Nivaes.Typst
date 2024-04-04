@@ -12,25 +12,39 @@
     <Product>Extensions</Product>
     <Description>Nivaes Typst.</Description>
     <PackageTags>Nivaes;Typst</PackageTags>
+
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <!--<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferencedProjectInPackage</TargetsForTfmSpecificContentInPackage>-->
+  </PropertyGroup>
+
+  <!--<Target Name="IncludeReferencedProjectInPackage" Condition="'$(IncludeBuildOutput)' != 'false'">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\our_rust.dll" PackagePath="lib/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>-->
+
+  <!--<ItemGroup>
+    <Content Include="our_rust.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>-->
 
   <ItemGroup>
     <None Include="Images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
-	
+
   <ItemGroup>
-    <Folder Include="Components\" />
+    <Content Include="our_rust.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <!--<PackagePath>lib\net8.0</PackagePath>-->
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="..\Nivaes.Typst.UnitTest\Nivaes.Typst.UnitTest.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>

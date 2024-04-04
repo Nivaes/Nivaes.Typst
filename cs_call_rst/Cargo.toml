@@ -1,0 +1,12 @@
+[package]
+name = "cs_call_rst"
+version = "0.1.0"
+
+[lib]
+name="our_rust"
+crate-type = ["cdylib"]
+
+[dependencies]
+libc = "*"
+slab = "*"
+pool = "*"
