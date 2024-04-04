@@ -23,7 +23,7 @@ jobs:
         # os: [ubuntu-22.04, windows-2022, macos-14, macos-14-large]
 
     # runs-on: $ {{ matix.os }}
-    runs-on: [ubuntu-22.04, windows-2022]
+    runs-on: windows-2022
 
     steps:
     - name: Dump GitHub context
