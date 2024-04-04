@@ -8,8 +8,7 @@ on:
     - '**/*.md'
     - '**/*.sln'
   pull_request:
-    #types: [opened, synchronize, reopened]
-    types: [synchronize]
+    types: [opened, synchronize, reopened]
     paths-ignore:
     - '**/*.md'
     - '**/*.sln'
@@ -31,10 +30,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        global-json-file: ./global.json
-        source-url: https://nuget.pkg.github.com/Nivaes/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+         global-json-file: ./global.json
 
     - name: Restore Dependencies
       run: |
@@ -44,4 +40,10 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --configuration Release --no-build --verbosity normal --no-restore
+      run: dotnet test --configuration Release --no-build --verbosity normal --no-restore --collect:"XPlat Code Coverage"
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+

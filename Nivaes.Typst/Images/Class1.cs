@@ -1,4 +1,4 @@
-﻿namespace Nivaes.Typst
+﻿namespace Nivaes.Images
 {
     public class Class1
     {
