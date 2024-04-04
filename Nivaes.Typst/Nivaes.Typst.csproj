@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0;net8.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+
+    <PackageId>Nivaes.Typst</PackageId>
+    <Title>Nivaes Typst</Title>
+    <AssemblyName>Nivaes.Typst</AssemblyName>
+    <RootNamespace>Nivaes</RootNamespace>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <Product>Extensions</Product>
+    <Description>Nivaes Typst.</Description>
+    <PackageTags>Nivaes;Typst</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Images\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+
+</Project>

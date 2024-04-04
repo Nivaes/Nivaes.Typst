@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+    - 'release/v**'
+    paths-ignore:
+    - '**/*.md'
+    - '**/*.sln'
+  pull_request:
+    #types: [opened, synchronize, reopened]
+    types: [synchronize]
+    paths-ignore:
+    - '**/*.md'
+    - '**/*.sln'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: ./global.json
+        source-url: https://nuget.pkg.github.com/Nivaes/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Restore Dependencies
+      run: |
+          dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test --configuration Release --no-build --verbosity normal --no-restore
