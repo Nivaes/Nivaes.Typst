@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0;net8.0</TargetFramework>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
 
     <PackageId>Nivaes.Typst</PackageId>
     <Title>Nivaes Typst</Title>
     <AssemblyName>Nivaes.Typst</AssemblyName>
-    <RootNamespace>Nivaes</RootNamespace>
+    <RootNamespace>Nivaes.Typst</RootNamespace>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
     <Product>Extensions</Product>
     <Description>Nivaes Typst.</Description>
@@ -20,6 +20,17 @@
 	
   <ItemGroup>
     <Folder Include="Components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="..\Nivaes.Typst.UnitTest\Nivaes.Typst.UnitTest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
