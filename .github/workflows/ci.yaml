@@ -16,7 +16,7 @@ on:
 jobs:
 
   build:
-    name: ci $ {{ matix.os }}
+    name: ci ${{ matix.os }}
     strategy:
       fail-fast: false
       matrix:
