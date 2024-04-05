@@ -25,11 +25,13 @@
     </ItemGroup>
   </Target>-->
 
-  <!--<ItemGroup>
-    <Content Include="our_rust.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  <ItemGroup>
+    <Content Include="$(TargetDir)/Native/typst_ffi.*">
+      <!--<CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
+      <Link>/Native/%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>-->
+  </ItemGroup>
 
   <Import Project="../typst_ffi.targets" />
 
@@ -38,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--<NativeFileReference Include="./our_rust.dll"></NativeFileReference>-->
+    <!--<NativeFileReference Include="./Native/typst_ffi.dll"></NativeFileReference>-->
     
     <!--<Content Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))'"
              Include="$(MSBuildProjectDirectory)/../InteropProject.Native/my_lib/target/release/our_rust.dll.so">

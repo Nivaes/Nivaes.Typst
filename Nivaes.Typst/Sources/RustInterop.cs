@@ -10,7 +10,7 @@ namespace Nivaes.Typst
 {
     public class RustInterop
     {
-        [DllImport("our_rust.dll", EntryPoint = "add_numbers")]
+        [DllImport("./Native/typst_ffi", EntryPoint = "add_numbers")]
         private static extern Int32 add_numbers(Int32 number1, Int32 number2);
 
         public static int AddNumbers(int number1, int number2)

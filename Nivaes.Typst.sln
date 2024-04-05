@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
 		LICENSE = LICENSE
-		Native.targets = Native.targets
 		README.md = README.md
 		typst_ffi.targets = typst_ffi.targets
+		rust_native.targets = rust_native.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F437BD4B-BC83-4E2E-8328-26726CCBEC84}"
