@@ -16,7 +16,9 @@ on:
 jobs:
 
   build:
+    name: ci $ {{ matix.os }}
     strategy:
+      fail-fast: false
       matrix:
         include:
         - os: ubuntu-22.04
