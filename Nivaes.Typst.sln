@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
 		LICENSE = LICENSE
+		Native.targets = Native.targets
 		README.md = README.md
+		typst_ffi.targets = typst_ffi.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F437BD4B-BC83-4E2E-8328-26726CCBEC84}"
@@ -37,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{E994AD25-3A4
 		Doc\notas.md = Doc\notas.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nivaes.Typst.Console", "Nivaes.Typst.Console\Nivaes.Typst.Console.csproj", "{6DB4F087-6BA8-4D33-81D6-4E2874E9C746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nivaes.Typst.Console", "Nivaes.Typst.Console\Nivaes.Typst.Console.csproj", "{6DB4F087-6BA8-4D33-81D6-4E2874E9C746}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

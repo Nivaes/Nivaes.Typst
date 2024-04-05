@@ -31,16 +31,29 @@
     </Content>
   </ItemGroup>-->
 
+  <Import Project="../typst_ffi.targets" />
+
   <ItemGroup>
     <None Include="Images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="our_rust.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <!--<NativeFileReference Include="./our_rust.dll"></NativeFileReference>-->
+    
+    <!--<Content Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))'"
+             Include="$(MSBuildProjectDirectory)/../InteropProject.Native/my_lib/target/release/our_rust.dll.so">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
-      <!--<PackagePath>lib\net8.0</PackagePath>-->
     </Content>
+
+    <Content Condition="'$(OS)' == 'Windows_NT'"
+             Include="$(MSBuildProjectDirectory)/../InteropProject.Native/my_lib/target/release/our_rust.dll">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+    </Content>-->
+    
   </ItemGroup>
 
   <ItemGroup>

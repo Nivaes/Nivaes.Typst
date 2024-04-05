@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <CargoPackage>typst_ffi</CargoPackage>
+        <!--<CargoWorkspacePath>$(MSBuildThisFileDirectory)/..</CargoWorkspacePath>-->
+      <CargoWorkspacePath>$(MSBuildThisFileDirectory)typst_ffi\</CargoWorkspacePath>
+    </PropertyGroup>
+
+    <Import Project="Native.targets" />
+</Project>

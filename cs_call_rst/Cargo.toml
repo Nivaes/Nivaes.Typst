@@ -1,12 +1,15 @@
 [package]
-name = "cs_call_rst"
-version = "0.1.0"
+name = "typst-ffi"
+version = "0.0.0"
+edition = "2024"
+license = "MIT"
 
 [lib]
-name="our_rust"
+#crate-type = ["cdylib","staticlib"]
 crate-type = ["cdylib"]
 
 [dependencies]
-libc = "*"
-slab = "*"
-pool = "*"
+typst = "0.11.0"
+typst-ide = "0.11.0"
+typst-pdf = "0.11.0"
+comemo = "0.4"
