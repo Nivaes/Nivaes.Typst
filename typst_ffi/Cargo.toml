@@ -1,7 +1,7 @@
 [package]
 name = "typst-ffi"
 version = "0.0.0"
-edition = "2021"
+edition = "2024"
 license = "MIT"
 
 [lib]
@@ -10,6 +10,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 typst = "0.11.0"
-#typst-ide = "0.11.0"
-#typst-pdf = "0.11.0"
+typst-ide = "0.11.0"
+typst-pdf = "0.11.0"
 comemo = "0.4"
