@@ -16,13 +16,15 @@ on:
 jobs:
 
   build:
-    name: ci ${{ matix.os }}
+    name: ci ${{ matrix.target }}
     strategy:
       fail-fast: false
       matrix:
         include:
-        - os: ubuntu-22.04
-        - os: windows-2022
+        - target: x86_64-unknown-linux-musl
+          os: ubuntu-22.04
+        - target: x86_64-pc-windows-msvc
+          os: windows-2022
         #os: [ubuntu-22.04]
         #os: [ubuntu-22.04, windows-2022]
         #os: [ubuntu-22.04, windows-2022, macos-14, macos-14-large]
