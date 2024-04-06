@@ -12,25 +12,27 @@
     <Product>Extensions</Product>
     <Description>Nivaes Typst.</Description>
     <PackageTags>Nivaes;Typst</PackageTags>
+
   </PropertyGroup>
+
+  <Import Project="../typst_ffi.targets" />
+    
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferencedProjectInPackage</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <Target Name="IncludeReferencedProjectInPackage" Condition="'$(IncludeBuildOutput)' != 'false'">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)/Native/typst_ffi.*" PackagePath="Native/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
 
   <ItemGroup>
     <None Include="Images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="..\Nivaes.Typst.UnitTest\Nivaes.Typst.UnitTest.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>
