@@ -14,26 +14,43 @@
     <PackageTags>Nivaes;Typst</PackageTags>
 
   </PropertyGroup>
-  
+
+  <Import Project="../typst_ffi.targets" />
+    
   <PropertyGroup>
-    <!--<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferencedProjectInPackage</TargetsForTfmSpecificContentInPackage>-->
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferencedProjectInPackage</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
 
-  <!--<Target Name="IncludeReferencedProjectInPackage" Condition="'$(IncludeBuildOutput)' != 'false'">
+  <Target Name="IncludeReferencedProjectInPackage" Condition="'$(IncludeBuildOutput)' != 'false'">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\our_rust.dll" PackagePath="lib/$(TargetFramework)" />
+      <TfmSpecificPackageFile Include="$(OutputPath)/Native/typst_ffi.*" PackagePath="Native/$(TargetFramework)" />
     </ItemGroup>
-  </Target>-->
+  </Target>
 
-  <ItemGroup>
-    <Content Include="$(TargetDir)/Native/typst_ffi.*">
-      <!--<CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
+  <!-- <Target Name="IncludeBuildDependsOn">
+     <Message Text="Ini - Copy" />
+     <Copy SourceFiles="$(TargetDir)/Native/typst_ffi.*"
+          DestinationFolder="$(OutputPath)/Native/"
+          SkipUnchangedFiles="true"
+           />
+     <Message Text="Fin - Copy" />
+  </Target> -->
+
+  <!-- <ItemGroup>
+    <Content Include="$(TargetDir)/Native/typst_ffi.*" Exclude="*.nocopy">
       <Link>/Native/%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
+  </ItemGroup> -->
 
-  <Import Project="../typst_ffi.targets" />
+  <!-- <Target Name="AfterBuild" AfterTargets="CargoBuildCopy">
+   <Message Text="Ini - Copy" />
+    <Copy SourceFiles="$(TargetDir)/Native/typst_ffi.*"
+          DestinationFolder="$(OutputPath)/Native/"
+          SkipUnchangedFiles="true"
+           />
+     <Message Text="Fin - Copy" />
+  </Target> -->
 
   <ItemGroup>
     <None Include="Images\icon.png" Pack="true" PackagePath="\" />

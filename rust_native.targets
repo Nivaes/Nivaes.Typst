@@ -60,7 +60,7 @@
         <CargoBuildArg Condition=" '$(CargoConfiguration)' == 'release' " Include="--release" />
     </ItemGroup>
 
-    <Target Name="Cargo" BeforeTargets="Build">
+    <Target Name="Cargo" BeforeTargets="PrepareForBuild">
         <Exec Command="cargo @(CargoChannelArg, ' ') build @(CargoBuildArg, ' ')" WorkingDirectory="$(CargoWorkspacePath)" />
     </Target>
 
@@ -85,7 +85,7 @@
         <CargoLibrary Include="$(CargoArtifactPath)" />
     </ItemGroup>
 
-    <Target Name="CargoBuildCopy" DependsOnTargets="Cargo" AfterTargets="Build" Condition=" '$(IsAotBuild)' == 'false' ">
+    <Target Name="CargoBuildCopy" DependsOnTargets="Cargo" BeforeTargets="PrepareForBuild" Condition=" '$(IsAotBuild)' == 'false' ">
         <Copy Condition=" '$(TargetDir)' != '' " SourceFiles="@(CargoLibrary)" DestinationFolder="$(TargetDir)/Native" />
     </Target>
 

@@ -23,6 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <Import Project="../typst_ffi.targets" />
+
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
