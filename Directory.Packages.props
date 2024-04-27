@@ -11,6 +11,6 @@
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.12.2" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.23.2.88755" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.24.0.89429" />
   </ItemGroup>
 </Project>
