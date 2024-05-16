@@ -22,18 +22,23 @@ jobs:
       matrix:
         include:
         - target: x86_64-unknown-linux-musl
-          os: ubuntu-22.04
-
+          os: ubuntu-latest
+          cross: true
         - target: aarch64-unknown-linux-musl
-          os: ubuntu-22.04
+          os: ubuntu-latest
+          cross: true
         - target: armv7-unknown-linux-musleabi
           os: ubuntu-latest
+          cross: true
         - target: x86_64-apple-darwin
           os: macos-latest
+          cross: false
         - target: aarch64-apple-darwin
           os: macos-latest
+          cross: false
         - target: x86_64-pc-windows-msvc
-          os: windows-2022
+          os: windows-latest
+          cross: false
 
     runs-on: ${{ matrix.os }}
 
@@ -47,6 +52,16 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          global-json-file: ./global.json
+
+    - name: Run Cross
+      if: ${{ matrix.cross }}
+      run: |
+        cargo install cross --git https://github.com/cross-rs/cross.git
+        cross build -p typst-cli --release --target ${{ matrix.target }} --features self-update,vendor-openssl
+
+    - name: Run Cargo
+      if: ${{ !matrix.cross }}
+      run: cargo build -p typst-cli --release --target ${{ matrix.target }} --features self-update
 
     - name: Restore Dependencies
       run: |
