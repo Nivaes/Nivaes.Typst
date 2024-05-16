@@ -58,12 +58,12 @@ jobs:
       working-directory: ./typst_ffi
       run: |
         cargo install cross --git https://github.com/cross-rs/cross.git
-        cross build -p typst-cli --release --target ${{ matrix.target }} --features self-update,vendor-openssl
+        cross build -p typst-cli --release --target ${{ matrix.target }}
 
     - name: Run Cargo
       if: ${{ !matrix.cross }}
       working-directory: ./typst_ffi
-      run: cargo build -p typst-cli --release --target ${{ matrix.target }} --features self-update
+      run: cargo build -p typst-cli --release --target ${{ matrix.target }}
 
     - name: Restore Dependencies
       run: |
