@@ -66,7 +66,7 @@
 
     <!-- In AOT builds, add a reference to the IL compiler and link the static native artifact -->
     <ItemGroup Condition=" '$(IsAotBuild)' == 'true' ">
-        <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="8.0.7" />
+        <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="8.0.8" />
 
         <IlcArg Include="--completetypemetadata" />
         <IlcArg Include="-g" />
