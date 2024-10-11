@@ -9,7 +9,7 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0" />
     <PackageVersion Include="dotnet-xunit" Version="2.3.1" />
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.12.3" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.12.8" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.0.90414" />
   </ItemGroup>
