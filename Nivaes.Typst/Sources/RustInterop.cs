@@ -27,7 +27,7 @@ namespace Nivaes.Typst
         public static extern int RushExecute(string input);
 #elif MACOS
         private const string NativeLibrary = "Native/libtypst_ffi.dylib";
-else
+#else
         using System.Runtime.InteropServices.JavaScript;
 
         [JSImport("rush_execute", "rush.wasm")]
