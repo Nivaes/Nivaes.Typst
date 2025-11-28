@@ -1,0 +1,97 @@
+[package]
+name = "typst-cli"
+description = "The command line interface for Typst."
+categories = ["compilers", "command-line-utilities"]
+keywords = ["typst", "cli"]
+version = { workspace = true }
+rust-version = { workspace = true }
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+repository = { workspace = true }
+license = { workspace = true }
+readme = { workspace = true }
+
+[[bin]]
+name = "typst"
+path = "src/main.rs"
+doc = false
+
+[dependencies]
+typst = { workspace = true }
+typst-eval = { workspace = true }
+typst-html = { workspace = true }
+typst-kit = { workspace = true }
+typst-macros = { workspace = true }
+typst-pdf = { workspace = true }
+typst-render = { workspace = true }
+typst-svg = { workspace = true }
+typst-timing = { workspace = true }
+chrono = { workspace = true }
+clap = { workspace = true, features = ["string"] }
+clap_complete = { workspace = true }
+codespan-reporting = { workspace = true }
+color-print = { workspace = true }
+comemo = { workspace = true }
+dirs = { workspace = true }
+ecow = { workspace = true }
+fs_extra = { workspace = true }
+notify = { workspace = true }
+open = { workspace = true }
+parking_lot = { workspace = true }
+pathdiff = { workspace = true }
+rayon = { workspace = true }
+rustc-hash = { workspace = true }
+same-file = { workspace = true }
+self-replace = { workspace = true, optional = true }
+semver = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+shell-escape = { workspace = true }
+sigpipe = { workspace = true }
+tar = { workspace = true }
+tempfile = { workspace = true }
+tiny_http = { workspace = true, optional = true }
+toml = { workspace = true }
+ureq = { workspace = true }
+xz2 = { workspace = true, optional = true }
+zip = { workspace = true, optional = true }
+
+[build-dependencies]
+chrono = { workspace = true }
+clap = { workspace = true, features = ["string"] }
+clap_complete = { workspace = true }
+clap_mangen = { workspace = true }
+color-print = { workspace = true }
+semver = { workspace = true }
+serde = { workspace = true }
+
+[features]
+default = ["embed-fonts", "http-server"]
+
+# Embeds some fonts into the binary, see typst-kit
+embed-fonts = ["typst-kit/embed-fonts"]
+
+# Enables the built-in HTTP server for `typst watch` and HTML export.
+http-server = ["dep:tiny_http"]
+
+# Permits the CLI to update itself without a package manager.
+self-update = ["dep:self-replace", "dep:xz2", "dep:zip"]
+
+# Whether to vendor OpenSSL. Not applicable to Windows and macOS builds.
+vendor-openssl = ["typst-kit/vendor-openssl"]
+
+[lints]
+workspace = true
+
+# The following metadata is used by `cargo-binstall`, and should be synchronized
+# with `.github/workflows/release.yml`.
+[package.metadata.binstall]
+pkg-url = "{ repo }/releases/download/v{ version }/typst-{ target }{ archive-suffix }"
+bin-dir = "typst-{ target }/typst{ binary-ext }"
+pkg-fmt = "txz"
+
+[package.metadata.binstall.overrides]
+x86_64-pc-windows-msvc = { pkg-fmt = "zip" }
+aarch64-pc-windows-msvc = { pkg-fmt = "zip" }

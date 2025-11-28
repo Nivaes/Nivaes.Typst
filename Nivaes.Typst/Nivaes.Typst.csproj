@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net10.0-android;net10.0-ios;net10.0-windows10.0.19041.0</TargetFrameworks>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
 
     <PackageId>Nivaes.Typst</PackageId>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <Import Project="../typst_ffi.targets" />
-    
+
   <PropertyGroup>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeReferencedProjectInPackage</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
@@ -30,20 +30,20 @@
   <ItemGroup>
     <None Include="Images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-windows10.0.19041.0'">
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-windows10.0.19041.0'">
     <Content Include="runtimes\win-x64\native\rush.dll" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
     <AndroidNativeLibrary Include="runtimes\android-arm64\native\librush.so" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-ios'">
     <NativeReference Include="runtimes\ios-arm64\native\librush.a" Kind="Static" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
     <PackageReference Include="Wasmtime" />
     <Content Include="runtimes\browser-wasm\native\rush.wasm" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
