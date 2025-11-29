@@ -11,7 +11,17 @@
     </PropertyGroup>
 
     <!-- Compile-time RIDs -->
+    <PropertyGroup Condition=" '$(NativeRid)' == 'win-x86' Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`WINDOWS`))' == 'true') ">
+        <IsWindows>true</IsWindows>
+        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+    </PropertyGroup>
+
     <PropertyGroup Condition=" '$(NativeRid)' == 'win-x64' Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`WINDOWS`))' == 'true') ">
+        <IsWindows>true</IsWindows>
+        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(NativeRid)' == 'win-arm64' Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`WINDOWS`))' == 'true') ">
         <IsWindows>true</IsWindows>
         <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
     </PropertyGroup>
@@ -22,10 +32,39 @@
         <DefineConstants>$(DefineConstants);LINUX;UNIX</DefineConstants>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(NativeRid)' == 'android-x64' Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`LINUX`))' == 'true') ">
+        <IsLinux>true</IsLinux>
+        <IsUnix>true</IsUnix>
+        <DefineConstants>$(DefineConstants);LINUX;UNIX</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(NativeRid)' == 'android-arm64' Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`LINUX`))' == 'true') ">
+        <IsLinux>true</IsLinux>
+        <IsUnix>true</IsUnix>
+        <DefineConstants>$(DefineConstants);LINUX;UNIX</DefineConstants>
+    </PropertyGroup>
+
+     <PropertyGroup Condition=" '$(NativeRid)' == 'linux-arm64' Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`LINUX`))' == 'true') ">
+        <IsLinux>true</IsLinux>
+        <IsUnix>true</IsUnix>
+        <DefineConstants>$(DefineConstants);LINUX;UNIX</DefineConstants>
+    </PropertyGroup>
+
     <PropertyGroup Condition=" '$(NativeRid)' == 'osx-x64'  Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`OSX`))' == 'true') ">
         <IsMacOS>true</IsMacOS>
         <IsUnix>true</IsUnix>
         <DefineConstants>$(DefineConstants);MACOS;UNIX</DefineConstants>
+    </PropertyGroup>
+
+     <PropertyGroup Condition=" '$(NativeRid)' == 'osx-arm64'  Or ('$(NativeRid)' == '' And '$([MSBuild]::IsOsPlatform(`OSX`))' == 'true') ">
+        <IsMacOS>true</IsMacOS>
+        <IsUnix>true</IsUnix>
+        <DefineConstants>$(DefineConstants);MACOS;UNIX</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(NativeRid)' == 'android-browser' Or ('$(NativeRid)' == '') ">
+        <ISWasm>true</ISWasm>
+        <DefineConstants>$(DefineConstants);WASM</DefineConstants>
     </PropertyGroup>
 
     <!-- Cargo configuration -->
@@ -38,10 +77,12 @@
         <CargoTarget Condition=" '$(IsWindows)' == 'true' ">x86_64-pc-windows-msvc</CargoTarget>
         <CargoTarget Condition=" '$(IsLinux)' == 'true' ">x86_64-unknown-linux-gnu</CargoTarget>
         <CargoTarget Condition=" '$(IsMacOS)' == 'true' ">x86_64-apple-darwin</CargoTarget>
+        <CargoTarget Condition=" '$(ISWasm)' == 'true' ">wasm32-unknown-unknown</CargoTarget>
 
         <CargoExtension Condition=" '$(IsWindows)' == 'true' ">dll</CargoExtension>
         <CargoExtension Condition=" '$(IsLinux)' == 'true' ">so</CargoExtension>
         <CargoExtension Condition=" '$(IsMacOS)' == 'true' ">dylib</CargoExtension>
+        <CargoExtension Condition=" '$(IsWasm)' == 'true' ">wasm</CargoExtension>
 
         <CargoExtension Condition=" '$(IsWindows)' == 'true' And '$(IsAotBuild)' == 'true' ">lib</CargoExtension>
         <CargoExtension Condition=" '$(IsLinux)' == 'true' And '$(IsAotBuild)' == 'true' ">a</CargoExtension>
@@ -50,6 +91,7 @@
         <CargoArtifact Condition=" '$(IsWindows)' == 'true' ">$(CargoPackage).$(CargoExtension)</CargoArtifact>
         <CargoArtifact Condition=" '$(IsLinux)' == 'true' ">lib$(CargoPackage).$(CargoExtension)</CargoArtifact>
         <CargoArtifact Condition=" '$(IsMacOS)' == 'true' ">lib$(CargoPackage).$(CargoExtension)</CargoArtifact>
+        <CargoArtifact Condition=" '$(IsWasm)' == 'true' ">$(CargoPackage).$(CargoExtension)</CargoArtifact>
 
         <CargoArtifactPath>$(CargoWorkspacePath)/target/$(CargoTarget)/$(CargoConfiguration)/$(CargoArtifact)</CargoArtifactPath>
     </PropertyGroup>
@@ -61,6 +103,9 @@
     </ItemGroup>
 
     <Target Name="Cargo" BeforeTargets="PrepareForBuild">
+        <Message Text="CargoChannelArg = $(CargoChannelArg)" Importance="High" />
+        <Message Text="CargoBuildArg = $(CargoChaCargoBuildArgnnelArg)" Importance="High" />
+        <Message Text="CargoWorkspacePath = $(CargoWorkspacePath)" Importance="High" />
         <Exec Command="cargo @(CargoChannelArg, ' ') build @(CargoBuildArg, ' ')" WorkingDirectory="$(CargoWorkspacePath)" />
     </Target>
 
@@ -86,10 +131,15 @@
     </ItemGroup>
 
     <Target Name="CargoBuildCopy" DependsOnTargets="Cargo" BeforeTargets="PrepareForBuild" Condition=" '$(IsAotBuild)' == 'false' ">
+        <Message Text="CargoWorkTargetDirpacePath = $(TargetDir)" Importance="High" />
+        <Message Text="CargoLibrary = $(CargoLibrary)" Importance="High" />
+        <Message Text="TargetDir = $(TargetDir)" Importance="High" />
         <Copy Condition=" '$(TargetDir)' != '' " SourceFiles="@(CargoLibrary)" DestinationFolder="$(TargetDir)/Native" />
     </Target>
 
     <Target Name="CargoPublishCopy" DependsOnTargets="Cargo" AfterTargets="Publish" Condition=" '$(IsAotBuild)' == 'false' ">
+        <Message Text="CargoLibrary = $(CargoLibrary)" Importance="High" />
+        <Message Text="PublishDir = $(PublishDir)" Importance="High" />
         <Copy SourceFiles="@(CargoLibrary)" DestinationFolder="$(PublishDir)/Native" />
     </Target>
 </Project>

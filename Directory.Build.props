@@ -1,5 +1,5 @@
 ﻿<Project>
-  
+
   <PropertyGroup>
     <Copyright>Copyright (c) Nivaes Systems</Copyright>
     <PackageProject>https://github.com/Nivaes/Nivaes.Typst</PackageProject>
@@ -10,7 +10,7 @@
     <Owners>Nivaes</Owners>
     <PackageReleaseNotes>https://www.nivaes.com</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/Nivaes/Nivaes.Typst</RepositoryUrl> 
+    <RepositoryUrl>https://github.com/Nivaes/Nivaes.Typst</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <NeutralLanguage>en</NeutralLanguage>
@@ -26,6 +26,10 @@
     <Platform>AnyCPU</Platform>
     <DebugType>full</DebugType>
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
